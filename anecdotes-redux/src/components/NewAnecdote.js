@@ -6,10 +6,10 @@ import { Card, CardContent, Button, TextField} from "@mui/material"
 
 const NewAnecdote = () => {
     return (
-        <Card variant="elevation">
+        <Card variant="outlined" style={{width:"fit-content"}}>
         <CardContent>
-        <form>
-          <TextField id="standard-basic" label="Standard" variant="standard" />
+        <form style={{display:"flex",alignItems:"center",gap:"2rem"}}>
+          <TextField id="standard-basic" label="My anecdote..." variant="standard" />
           <Button variant="contained" color="warning">create</Button>
         </form>
         </CardContent>

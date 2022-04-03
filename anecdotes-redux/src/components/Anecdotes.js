@@ -1,5 +1,6 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { vote } from "../reducers/anecdoteReducer"
 
 //MUI components
 
@@ -10,8 +11,8 @@ const Anecdotes = () => {
   const anecdotes = useSelector(state => state)
   const dispatch = useDispatch()
 
-  const vote = id => {
-    console.log("vote", id)
+  const toVote = id => {
+    dispatch(vote(id))
   }
 
   return (
@@ -22,7 +23,7 @@ const Anecdotes = () => {
             <CardContent>
               <Typography paragraph>{anecdote.content}</Typography>
               <Typography variant="h6">has {anecdote.votes}</Typography>
-              <Button variant="contained" color="success" size="small" onClick={() => vote(anecdote.id)}>vote</Button>
+              <Button variant="contained" color="secondary" size="small" onClick={() => toVote(anecdote.id)}>vote</Button>
             </CardContent>
           </Card>
         </Grid>
