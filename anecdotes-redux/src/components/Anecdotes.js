@@ -3,12 +3,11 @@ import { useSelector, useDispatch } from "react-redux"
 import { vote } from "../reducers/anecdoteReducer"
 
 //MUI components
-
-
 import {Grid, Card, CardContent, Typography, Button} from "@mui/material"
 
 const Anecdotes = () => {
   const anecdotes = useSelector(state => state)
+  const anecdotesInOrder = anecdotes.sort((a,b) => b.votes - a.votes)
   const dispatch = useDispatch()
 
   const toVote = id => {
@@ -17,7 +16,7 @@ const Anecdotes = () => {
 
   return (
     <Grid container spacing={2}>
-      {anecdotes.map(anecdote => (
+      {anecdotesInOrder.map(anecdote => (
         <Grid item key={anecdote.id} xxs={12} md={6} lg={4}>
           <Card variant="outlined">
             <CardContent>
