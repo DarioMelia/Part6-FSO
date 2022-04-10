@@ -11,8 +11,8 @@ const App = () => {
   return (
     <div>
       <Header />
-      <Container maxWidth="lg" style={{padding:"0 auto", marginTop:"2.6rem"}}>
       <Notification/>
+      <Container maxWidth="lg" style={{padding:"0 auto", marginTop:"2.6rem"}}>
         <Anecdotes />
         <NewAnecdote/>
       </Container>

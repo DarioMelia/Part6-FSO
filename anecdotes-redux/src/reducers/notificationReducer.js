@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     msg:"Wellcome to my page",
-    isErr:false
+    type:"info",
+    isShown:"false"
 }
 
 const notificationSlice = createSlice({
@@ -10,11 +11,14 @@ const notificationSlice = createSlice({
     initialState,
     reducers:{
         showNot(state,action){
-            const msg = action.payload
-            return {...state, msg:msg}
+            const {msg,type} = action.payload
+            return {msg,type,isShown:true}
+        },
+        hideNot(state,action){
+            return {...state, isShown:false}   
         }
     }
 })
 
-export const {showNot} = notificationSlice.actions
+export const {showNot,hideNot} = notificationSlice.actions
 export default notificationSlice.reducer
