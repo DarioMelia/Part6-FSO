@@ -26,7 +26,7 @@ const NewAnecdote = () => {
   }
   
     return (
-        <Card variant="outlined" style={{width:"fit-content",marginTop:"1.5rem"}}>
+        <Card variant="elevation" style={{width:"fit-content",marginTop:"1.5rem"}}>
         <CardContent>
         <form style={{display:"flex",alignItems:"center",gap:"2rem"}} onSubmit={createAnecdote}>
           <TextField name="content" id="standard-basic" label="My anecdote..." variant="standard" />

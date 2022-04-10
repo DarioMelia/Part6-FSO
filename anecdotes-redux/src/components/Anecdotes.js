@@ -8,7 +8,10 @@ import {Grid, Card, CardContent, Typography, Button} from "@mui/material"
 
 const Anecdotes = () => {
   const anecdotes = useSelector(state => state.anecdotes)
+  const filter = useSelector(state=>state.filter)
   const anecdotesInOrder = [...anecdotes].sort((a,b) => b.votes - a.votes)
+  const filteredAnecdotes = [...anecdotesInOrder].filter(an=>
+    an.content.toLowerCase().includes(filter.toLowerCase()))
   const dispatch = useDispatch()
 
   const timerRef = useRef(null)
@@ -26,8 +29,8 @@ const Anecdotes = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      {anecdotesInOrder.map(anecdote => (
+    <Grid container spacing={2} >
+      {filteredAnecdotes.map(anecdote => (
         <Grid item key={anecdote.id} xxs={12} md={6} lg={4}>
           <Card variant="outlined">
             <CardContent>
