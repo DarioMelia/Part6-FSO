@@ -6,8 +6,8 @@ import { vote } from "../reducers/anecdoteReducer"
 import {Grid, Card, CardContent, Typography, Button} from "@mui/material"
 
 const Anecdotes = () => {
-  const anecdotes = useSelector(state => state)
-  const anecdotesInOrder = anecdotes.sort((a,b) => b.votes - a.votes)
+  const anecdotes = useSelector(state => state.anecdotes)
+  const anecdotesInOrder = [...anecdotes].sort((a,b) => b.votes - a.votes)
   const dispatch = useDispatch()
 
   const toVote = id => {
