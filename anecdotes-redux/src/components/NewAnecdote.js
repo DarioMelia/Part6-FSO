@@ -1,5 +1,3 @@
-import React, { useEffect, useRef} from "react"
-
 import { Card, CardContent, Button, TextField} from "@mui/material"
 import { useDispatch } from "react-redux"
 import { createNew } from "../reducers/anecdoteReducer"
