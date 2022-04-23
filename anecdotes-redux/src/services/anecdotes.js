@@ -23,4 +23,9 @@ const voteOne = async (id) => {
     return res.data
 }
 
-export default { getAll, createOne, voteOne}
+const deleteOne = async(id) => {
+    const res = await axios.delete(`${baseUrl}/${id}`)
+    return res.data
+}
+
+export default { getAll, createOne, voteOne, deleteOne}
