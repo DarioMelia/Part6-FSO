@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import "./index.css"
 
 import Header from "./components/Header"
@@ -8,7 +9,17 @@ import Filter from "./components/Filter"
 //MUI components
 import Container from "@mui/material/Container"
 
+
+import anService from "./services/anecdotes"
+import { setAnecdotes } from "./reducers/anecdoteReducer"
+import { useDispatch } from "react-redux"
+
+
 const App = () => {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    anService.getAll().then(anecdotes=>dispatch(setAnecdotes(anecdotes)))
+  },[dispatch])
   return (
     <div>
       <Header />
