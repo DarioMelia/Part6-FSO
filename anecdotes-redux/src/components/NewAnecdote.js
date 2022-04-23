@@ -4,7 +4,7 @@ import { Card, CardContent, Button, TextField} from "@mui/material"
 import { useDispatch } from "react-redux"
 import { createNew } from "../reducers/anecdoteReducer"
 import { showNot, hideNot } from "../reducers/notificationReducer"
-import anService from "../services/anecdotes"
+
 
 
 const NewAnecdote = () => {
@@ -18,8 +18,7 @@ const NewAnecdote = () => {
   const createAnecdote = async(e) =>{
     e.preventDefault()
     const content = e.target.content.value
-    const newNote = await anService.createOne(content)
-    dispatch(createNew(newNote))
+    dispatch(createNew(content))
     clearTimeout(timerRef.current)
     dispatch(showNot({msg:"New anecdote created",type:"success"}))
     timerRef.current = setTimeout(()=>dispatch(hideNot()),5000)
