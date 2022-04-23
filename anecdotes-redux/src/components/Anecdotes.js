@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { vote } from "../reducers/anecdoteReducer"
+import { voteFor } from "../reducers/anecdoteReducer"
 import { showNot, hideNot } from "../reducers/notificationReducer"
 
 //MUI components
@@ -21,7 +21,7 @@ const Anecdotes = () => {
   }, [])
 
   const toVote = (id,content) => {
-    dispatch(vote(id))
+    dispatch(voteFor(id))
     clearTimeout(timerRef.current)
     dispatch(showNot({msg:`You voted "${content.slice(0,40)}..."`,type:"info"}))
     timerRef.current = setTimeout(()=>dispatch(hideNot()),5000)

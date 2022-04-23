@@ -16,7 +16,6 @@ const anecdoteSlice = createSlice({
       return state.concat(action.payload)
     },
     setAnecdotes:(state,action) =>{
-      console.log("payload", action.payload)
       return action.payload
     }
   }
@@ -34,6 +33,13 @@ export const createNew = (content) => {
   return async dispatch => {
     const newAnecdote = await anService.createOne(content)
     dispatch(appendAnecdote(newAnecdote))
+  }
+}
+
+export const voteFor = id => {
+  return async dispatch => {
+    const changedAnecdote = await anService.voteOne(id)
+    dispatch(vote(id))
   }
 }
 
