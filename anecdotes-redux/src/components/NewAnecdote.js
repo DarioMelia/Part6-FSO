@@ -3,25 +3,20 @@ import React, { useEffect, useRef} from "react"
 import { Card, CardContent, Button, TextField} from "@mui/material"
 import { useDispatch } from "react-redux"
 import { createNew } from "../reducers/anecdoteReducer"
-import { showNot, hideNot } from "../reducers/notificationReducer"
+import { setNotification } from "../reducers/notificationReducer"
 
 
 
 const NewAnecdote = () => {
   const dispatch = useDispatch()
 
-  const timerRef = useRef(null)
 
-  useEffect(() => {
-    return () => clearTimeout(timerRef.current);
-  }, [])
   const createAnecdote = async(e) =>{
     e.preventDefault()
     const content = e.target.content.value
     dispatch(createNew(content))
-    clearTimeout(timerRef.current)
-    dispatch(showNot({msg:"New anecdote created",type:"success"}))
-    timerRef.current = setTimeout(()=>dispatch(hideNot()),5000)
+    dispatch(setNotification("New anecdote created","success",4000))
+    
     
     e.target.content.value = ""
   }

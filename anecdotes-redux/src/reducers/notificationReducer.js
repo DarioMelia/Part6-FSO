@@ -19,6 +19,17 @@ const notificationSlice = createSlice({
         }
     }
 })
-
 export const {showNot,hideNot} = notificationSlice.actions
+let timer
+export const setNotification = (msg, type, timeOut) => {
+    clearTimeout(timer)
+    return dispatch => {
+        dispatch(showNot({msg,type}))
+        timer = setTimeout(() => {
+            dispatch(hideNot())
+        }, timeOut);
+    }
+}
+
+
 export default notificationSlice.reducer

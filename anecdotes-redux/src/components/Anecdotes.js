@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { voteFor } from "../reducers/anecdoteReducer"
-import { showNot, hideNot } from "../reducers/notificationReducer"
+import { setNotification } from "../reducers/notificationReducer"
 
 //MUI components
 import {Grid, Card, CardContent, Typography, Button} from "@mui/material"
@@ -14,18 +14,10 @@ const Anecdotes = () => {
     an.content.toLowerCase().includes(filter.toLowerCase()))
   const dispatch = useDispatch()
 
-  const timerRef = useRef(null)
-
-  useEffect(() => {
-    return () => clearTimeout(timerRef.current);
-  }, [])
 
   const toVote = (id,content) => {
     dispatch(voteFor(id))
-    clearTimeout(timerRef.current)
-    dispatch(showNot({msg:`You voted "${content.slice(0,40)}..."`,type:"info"}))
-    timerRef.current = setTimeout(()=>dispatch(hideNot()),5000)
-    
+    dispatch(setNotification(`You voted "${content.slice(0,40)}..."`,"info",4000))
   }
 
   return (
