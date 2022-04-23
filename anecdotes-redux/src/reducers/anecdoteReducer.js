@@ -1,14 +1,5 @@
-import uniqid from "uniqid"
+import anService from "../services/anecdotes"
 import { createSlice } from "@reduxjs/toolkit"
-
-const asObject = (anecdote) => {
-  return {
-    content: anecdote,
-    id: uniqid(),
-    votes: 0
-  }
-}
-
 
 
 const anecdoteSlice = createSlice({
@@ -32,36 +23,13 @@ const anecdoteSlice = createSlice({
     }
   }
 })
-// const reducer = (state = initialState, action) => {
-//   switch(action.type){
-//     case "VOTE":
-//       return state.map(anecdote => anecdote.id === action.data.id?
-//         {...anecdote, votes: anecdote.votes + 1}:anecdote)
-//     case "NEW":
-//      return state.concat(action.data.newAnecdote)
-//     default:
-//       return state
-//   }
-// }
-
-// ///ACTION CREATORS 
-// export const vote = (id) => {
-//   return{
-//     type: "VOTE",
-//     data: {id}
-//   }
-// }
-
-// export const createNew = (content) => {
-//   const newAnecdote = {
-//     content: content,
-//     id: uniqid(),
-//     votes: 0
-//   }
-//   return{
-//     type: "NEW",
-//     data: {newAnecdote}
-//   }
-// }
 export const {createNew,vote, appendAnecdote, setAnecdotes} = anecdoteSlice.actions
+
+export const initializeAnecdotes = () => {
+  return async dispatch => {
+    const anecdotes = await anService.getAll()
+    dispatch(setAnecdotes(anecdotes))
+  }
+}
+
 export default anecdoteSlice.reducer

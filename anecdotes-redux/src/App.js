@@ -10,15 +10,14 @@ import Filter from "./components/Filter"
 import Container from "@mui/material/Container"
 
 
-import anService from "./services/anecdotes"
-import { setAnecdotes } from "./reducers/anecdoteReducer"
+import { initializeAnecdotes } from "./reducers/anecdoteReducer"
 import { useDispatch } from "react-redux"
 
 
 const App = () => {
   const dispatch = useDispatch()
   useEffect(()=>{
-    anService.getAll().then(anecdotes=>dispatch(setAnecdotes(anecdotes)))
+    dispatch(initializeAnecdotes())
   },[dispatch])
   return (
     <div>
