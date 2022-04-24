@@ -10,7 +10,8 @@ const Notification = (props) => {
     transition:"opacity 250ms ease-in",
     position:"fixed",
     fontSize:"1.25rem",
-    boxShadow: "5px 5px 12px 0px rgba(0,0,0,0.62)"
+    boxShadow: "5px 5px 12px 0px rgba(0,0,0,0.62)",
+    zIndex:"20"
   }
  
   return <div style={{display:"flex",justifyContent:"center"}}><Alert severity={type} style={style}>{msg}</Alert></div>
