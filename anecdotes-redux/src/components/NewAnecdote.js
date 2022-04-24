@@ -1,19 +1,17 @@
 import { Card, CardContent, Button, TextField} from "@mui/material"
-import { useDispatch } from "react-redux"
+import { connect } from "react-redux"
 import { createNew } from "../reducers/anecdoteReducer"
 import { setNotification } from "../reducers/notificationReducer"
 
 
 
-const NewAnecdote = () => {
-  const dispatch = useDispatch()
-
+const NewAnecdote = (props) => {
 
   const createAnecdote = async(e) =>{
     e.preventDefault()
     const content = e.target.content.value
-    dispatch(createNew(content))
-    dispatch(setNotification("New anecdote created","success",4000))
+    props.createNew(content)
+    props.setNotification("New anecdote created","success",4000)
     
     
     e.target.content.value = ""
@@ -30,5 +28,9 @@ const NewAnecdote = () => {
         </Card>
     )
 }
-
-export default NewAnecdote
+const mapDispatchToProps = {
+  createNew,
+  setNotification
+}
+const ConnectedForm = connect(null,mapDispatchToProps)(NewAnecdote)
+export default ConnectedForm

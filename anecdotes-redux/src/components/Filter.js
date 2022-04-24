@@ -1,13 +1,13 @@
 import React from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { connect } from "react-redux"
 import { setFilter } from "../reducers/filterReducer"
 
 import { TextField } from "@mui/material"
 
-const Filter = () => {
-    const dispatch = useDispatch()
+const Filter = (props) => {
+    
     const changeHandler = (e) => {
-        dispatch(setFilter(e.target.value))
+        props.setFilter(e.target.value)
     }
     
     return  <TextField
@@ -22,4 +22,9 @@ const Filter = () => {
 
 }
 
-export default Filter
+const mapDispatchToProps = {
+    setFilter,
+}
+
+const ConnectedFilter = connect(null,mapDispatchToProps)(Filter)
+export default ConnectedFilter
