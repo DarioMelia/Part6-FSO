@@ -1,8 +1,8 @@
-import { useSelector} from "react-redux"
+import { connect } from "react-redux"
 import { Alert } from "@mui/material"
 
-const Notification = () => {
-  const {type,msg,isShown} = useSelector(state=>state.notification)
+const Notification = (props) => {
+  const {type,msg,isShown} = props.notification
   
   const style ={
     opacity:isShown===true?"1":"0",
@@ -16,4 +16,10 @@ const Notification = () => {
   return <div style={{display:"flex",justifyContent:"center"}}><Alert severity={type} style={style}>{msg}</Alert></div>
 }
 
-export default Notification
+const mapStateToProps = (state) => {
+  return {
+    notification:state.notification
+  }
+}
+const ConnectedNotification = connect(mapStateToProps)(Notification)
+export default ConnectedNotification

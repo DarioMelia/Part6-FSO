@@ -1,15 +1,17 @@
 import React from "react"
 
-import { useSelector } from "react-redux"
+import { connect } from "react-redux"
 
 import Anecdote from "./Anecdote"
 //MUI components
 import {Grid} from "@mui/material"
 
 
-const Anecdotes = () => {
-  const anecdotes = useSelector(state => state.anecdotes)
-  const filter = useSelector(state=>state.filter)
+const Anecdotes = (props) => {
+  const anecdotes = props.anecdotes
+  console.log('anecdotes', anecdotes)
+  const filter = props.filter
+  console.log('filter', filter)
   const anecdotesInOrder = [...anecdotes].sort((a,b) => b.votes - a.votes)
   const filteredAnecdotes = [...anecdotesInOrder].filter(an=>
     an.content.toLowerCase().includes(filter.toLowerCase()))
@@ -26,4 +28,13 @@ const Anecdotes = () => {
   )
 }
 
-export default Anecdotes
+const mapStateToProps = (state) => {
+  console.log("State: ", state)
+  return {
+    anecdotes: state.anecdotes,
+    filter: state.filter,
+  }
+}
+
+const ConnectedAnecdotes = connect(mapStateToProps)(Anecdotes)
+export default ConnectedAnecdotes
